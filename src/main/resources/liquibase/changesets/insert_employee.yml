@@ -1,0 +1,101 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert_employee # идентификатор набора изменений
+      author: Vyacheslav # имя разработчика, который добавил набор изменений
+      changes: # список изменений в этом наборе
+        - insert:
+            tableName: employee
+            columns:
+              - column:
+                  name: name
+                  value: Олег
+              - column:
+                  name: salary
+                  value: 90000
+              - column:
+                  name: position_id
+                  value: 1
+        - insert:
+            tableName: employee
+            columns:
+              - column:
+                  name: name
+                  value: Иван
+              - column:
+                  name: salary
+                  value: 95000
+              - column:
+                  name: position_id
+                  value: 1
+        - insert:
+            tableName: employee
+            columns:
+              - column:
+                  name: name
+                  value: Ольга
+              - column:
+                  name: salary
+                  value: 85000
+              - column:
+                  name: position_id
+                  value: 2
+        - insert:
+            tableName: employee
+            columns:
+              - column:
+                  name: name
+                  value: Роберт
+              - column:
+                  name: salary
+                  value: 92000
+              - column:
+                  name: position_id
+                  value: 2
+        - insert:
+            tableName: employee
+            columns:
+              - column:
+                  name: name
+                  value: Альберт
+              - column:
+                  name: salary
+                  value: 125000
+              - column:
+                  name: position_id
+                  value: 3
+        - insert:
+            tableName: employee
+            columns:
+              - column:
+                  name: name
+                  value: Илья
+              - column:
+                  name: salary
+                  value: 45000
+              - column:
+                  name: position_id
+                  value: 4
+        - insert:
+            tableName: employee
+            columns:
+              - column:
+                  name: name
+                  value: Степан
+              - column:
+                  name: salary
+                  value: 60000
+              - column:
+                  name: position_id
+                  value: 4
+        - insert:
+            tableName: employee
+            columns:
+              - column:
+                  name: name
+                  value: Катя
+              - column:
+                  name: salary
+                  value: 125000
+              - column:
+                  name: position_id
+                  value: 5

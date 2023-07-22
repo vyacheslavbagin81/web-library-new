@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert_position # идентификатор набора изменений
+      author: Vyacheslav # имя разработчика, который добавил набор изменений
+      changes: # список изменений в этом наборе
+        - insert:
+            tableName: position
+            columns:
+              - column:
+                  name: name_position
+                  value: бекенд разработчик
+        - insert:
+            tableName: position
+            columns:
+              - column:
+                  name: name_position
+                  value: фронт разработчик
+        - insert:
+            tableName: position
+            columns:
+              - column:
+                  name: name_position
+                  value: аналитик
+        - insert:
+            tableName: position
+            columns:
+              - column:
+                  name: name_position
+                  value: маркетолог
+        - insert:
+            tableName: position
+            columns:
+              - column:
+                  name: name_position
+                  value: руководитель проекта
