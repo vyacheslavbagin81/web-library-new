@@ -3,6 +3,7 @@ package ru.skypro.web_library.testing.service.employee;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.web_library.testing.dto.EmployeeDTO ;
 import ru.skypro.web_library.testing.dto.EmployeeFullInfo ;
+import ru.skypro.web_library.testing.entity.Employee;
 import ru.skypro.web_library.testing.exceptions.ExceptionNoId ;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ public interface EmployeeService {
     List<EmployeeDTO> getAllEmployee();
 
     // метод для изменения данных сотрудника
-    void editEmployee(EmployeeDTO employeeDTO) throws ExceptionNoId;
+    Employee editEmployee(EmployeeDTO employeeDTO) throws ExceptionNoId;
 
     // возвращает сотрудника по id
     EmployeeDTO getEmployeeToId(int id) throws ExceptionNoId;

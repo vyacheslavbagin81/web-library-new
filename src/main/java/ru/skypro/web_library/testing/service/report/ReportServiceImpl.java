@@ -35,7 +35,8 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public int downloadFile() throws IOException {
         LOGGER.info("Вызываем метод для вывода отчета, записи его в файл и сохранение данных файла в б/д");
-        String fileName = newName();
+        int id = (int) reportRepository.count();
+        String fileName = newName(id);
         ObjectMapper objectMapper = new ObjectMapper();
         List<ReportDTO> report = employeeRepository.getReport();
         LOGGER.debug("Получаем данные из б/д сотрудников");
@@ -44,30 +45,24 @@ public class ReportServiceImpl implements ReportService {
         // сщздаем и записываем файл
         File file = new File("src/report/" + fileName);
         Files.writeString(file.toPath(), json);
-        ReportFile reportFile = new ReportFile(file.getPath());
+        ReportFile reportFile = new ReportFile(id + 1, file.getPath());
         reportRepository.save(reportFile);
         LOGGER.debug("Сохраняем данные о файле в б/д с отчетами");
         return reportFile.getId();
     }
 
     @Override
-    public ResponseEntity<Resource> getFile(int id) throws IOException, ExceptionNoId {
+    public String getFile(int id) throws IOException, ExceptionNoId {
         LOGGER.info("Вызываем метод находит и возвращает созданный ранее файл в формате JSON по переданному уникальному идентификатору");
-        ReportFile reportFile = reportRepository.findById(id).orElseThrow(()->{
+        ReportFile reportFile = reportRepository.findById(id).orElseThrow(() -> {
             LOGGER.error("Ошибка ExceptionNoId нет файла под id={}", id);
             return new ExceptionNoId();
         });
-        String fileName = reportFile.getPath();
-        Resource resource = new ByteArrayResource(Files.readAllBytes(Path.of(fileName)));
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .body(resource);
+        return reportFile.getPath();
     }
 
     //    метод для создания нового имени файла
-    private String newName() {
-        int id = (int) reportRepository.count();
+    private String newName(int id) {
         String newName = "report" + id + ".json";
         LOGGER.debug("Создаем новое имя файла {}", newName);
         return newName;

@@ -51,7 +51,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void editEmployee(EmployeeDTO employeeDTO) throws ExceptionNoId {
+    public Employee editEmployee(EmployeeDTO employeeDTO) throws ExceptionNoId {
         LOGGER.info("Вызываем метод для изменения данных сотрудника");
         int id = employeeDTO.getId();
         Employee result = employeeRepository.findById(id)
@@ -63,11 +63,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (!employeeDTO.getName().isBlank()) {
             result.setName(employeeDTO.getName());
         }
-        if (employeeDTO.getSalary() > 0) {
+        if (employeeDTO.getSalary() > 1) {
             result.setSalary(employeeDTO.getSalary());
         }
         employeeRepository.save(result);
-        LOGGER.debug("Сщхраняем сотрудника с новыми данными в базу данных");
+        LOGGER.debug("Сохраняем сотрудника с новыми данными в базу данных");
+        return result;
     }
 
     @Override
@@ -90,8 +91,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeFullInfo getAllEmployeeToIdFullInfo(int id) throws ExceptionNoId {
         LOGGER.info("Вызываем метод для получения сотрудника по id={} с наименованием отдела", id);
-        return employeeRepository.findById(id)
-                .map(EmployeeMapDTO::toEmployeeFullInfo)
+        return employeeRepository.getAllEmployeeToIdFullInfo(id)
                 .orElseThrow(()->{
                     LOGGER.error("Ошибка ExceptionNoId нет сотрудника под id={}", id);
                     return new ExceptionNoId();
@@ -102,9 +102,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<EmployeeDTO> getEmployeeByPositionName(String position) {
         LOGGER.info("Вызываем метод для получения списка сотрудников работующих в отделе {}", position);
         String pos = position.toLowerCase();
-        List<Employee> employeeList = employeeRepository.findEmployeeByPosition_Name(pos);
-        LOGGER.debug("Получаем список сотрудников работующих в отделе {} из базы данных", position);
         if (!position.isBlank()) {
+            List<Employee> employeeList = employeeRepository.findEmployeeByPosition_Name(pos);
+            LOGGER.debug("Получаем список сотрудников работующих в отделе {} из базы данных", position);
             return EmployeeMapDTO.toEmployeeDTOList(employeeList);
         } else return getAllEmployee();
     }
@@ -137,5 +137,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         };
         List<EmployeeDTO> employeeDTOList = objectMapper.readValue(file.getBytes(), typeReference);
         employeeDTOList.forEach(this::addEmployees);
+    }
+
+    public boolean checkEmployees(Employee e1, Employee e2) {
+        return e1.equals(e2);
     }
 }

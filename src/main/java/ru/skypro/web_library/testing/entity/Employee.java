@@ -21,9 +21,14 @@ public class Employee {
 
 
     public Employee() {
-
     }
 
+    public Employee(int id, String name, int salary, Position position) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+        this.position = position;
+    }
 
     public int getId() {
         return id;

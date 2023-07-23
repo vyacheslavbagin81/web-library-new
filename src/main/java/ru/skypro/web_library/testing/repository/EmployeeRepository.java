@@ -10,12 +10,17 @@ import ru.skypro.web_library.testing.dto.EmployeeFullInfo;
 import ru.skypro.web_library.testing.entity.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EmployeeRepository extends CrudRepository<Employee, Integer>, PagingAndSortingRepository<Employee, Integer> {
     @Query("select new ru.skypro.web_library.testing.dto.EmployeeFullInfo(e.id, e.name, e.salary, p.namePosition) " +
             "from Employee e left join Position p where e.position.id = p.id")
     List<EmployeeFullInfo> getEmployeeFullInfo();
+
+    @Query("select new ru.skypro.web_library.testing.dto.EmployeeFullInfo(e.id, e.name, e.salary, p.namePosition) " +
+            "from Employee e left join Position p where e.position.id = p.id and e.id = ?1")
+    Optional<EmployeeFullInfo> getAllEmployeeToIdFullInfo(int id);
 
     @Query("select e from Employee e where e.position.namePosition = ?1")
     List<Employee> findEmployeeByPosition_Name(String name);
