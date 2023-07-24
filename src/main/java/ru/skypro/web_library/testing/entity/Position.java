@@ -15,6 +15,11 @@ public class Position {
     public Position() {
     }
 
+    public Position(int id, String namePosition) {
+        this.id = id;
+        this.namePosition = namePosition;
+    }
+
     public void setId(int id) {
         this.id = id;
     }

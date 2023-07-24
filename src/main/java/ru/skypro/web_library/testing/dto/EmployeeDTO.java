@@ -8,8 +8,14 @@ public class EmployeeDTO implements Serializable {
     private String name;
     private int salary;
 
+    public EmployeeDTO() {
+    }
 
-
+    public EmployeeDTO(int id, String name, int salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+    }
 
     public int getId() {
         return id;

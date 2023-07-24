@@ -1,5 +1,7 @@
 package ru.skypro.web_library.testing.dto;
 
+import java.util.Objects;
+
 public class EmployeeFullInfo {
     private int id;
     private String name;
@@ -46,5 +48,18 @@ public class EmployeeFullInfo {
 
     public void setPositionName(String positionName) {
         this.positionName = positionName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EmployeeFullInfo that = (EmployeeFullInfo) o;
+        return id == that.id && salary == that.salary && name.equals(that.name) && positionName.equals(that.positionName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, salary, positionName);
     }
 }

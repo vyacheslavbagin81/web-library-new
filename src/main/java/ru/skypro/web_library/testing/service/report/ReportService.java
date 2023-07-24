@@ -8,5 +8,5 @@ import java.io.IOException;
 
 public interface ReportService {
     int downloadFile() throws IOException;
-    ResponseEntity<Resource> getFile(int id) throws IOException, ExceptionNoId;
+    String getFile(int id) throws IOException, ExceptionNoId;
 }
