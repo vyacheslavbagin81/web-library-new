@@ -1,0 +1,101 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert_employee # идентификатор набора изменений
+      author: Vyacheslav # имя разработчика, который добавил набор изменений
+      changes: # список изменений в этом наборе
+        - insert:
+            tableName: employee
+            columns:
+              - column:
+                  name: name
+                  value: Тест1
+              - column:
+                  name: salary
+                  value: 1
+              - column:
+                  name: position_id
+                  value: 1
+        - insert:
+            tableName: employee
+            columns:
+              - column:
+                  name: name
+                  value: Тест2
+              - column:
+                  name: salary
+                  value: 2
+              - column:
+                  name: position_id
+                  value: 1
+        - insert:
+            tableName: employee
+            columns:
+              - column:
+                  name: name
+                  value: Тест3
+              - column:
+                  name: salary
+                  value: 3
+              - column:
+                  name: position_id
+                  value: 2
+        - insert:
+            tableName: employee
+            columns:
+              - column:
+                  name: name
+                  value: Тест4
+              - column:
+                  name: salary
+                  value: 4
+              - column:
+                  name: position_id
+                  value: 2
+        - insert:
+            tableName: employee
+            columns:
+              - column:
+                  name: name
+                  value: Тест5
+              - column:
+                  name: salary
+                  value: 5
+              - column:
+                  name: position_id
+                  value: 3
+        - insert:
+            tableName: employee
+            columns:
+              - column:
+                  name: name
+                  value: Тест6
+              - column:
+                  name: salary
+                  value: 6
+              - column:
+                  name: position_id
+                  value: 4
+        - insert:
+            tableName: employee
+            columns:
+              - column:
+                  name: name
+                  value: Тест7
+              - column:
+                  name: salary
+                  value: 7
+              - column:
+                  name: position_id
+                  value: 4
+        - insert:
+            tableName: employee
+            columns:
+              - column:
+                  name: name
+                  value: Тест8
+              - column:
+                  name: salary
+                  value: 8
+              - column:
+                  name: position_id
+                  value: 5
