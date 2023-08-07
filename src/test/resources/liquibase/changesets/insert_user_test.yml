@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert_user # идентификатор набора изменений
+      author: Vyacheslav # имя разработчика, который добавил набор изменений
+      changes: # список изменений в этом наборе
+        - insert:
+            tableName: auth_user
+            columns:
+              - column:
+                  name: user_name
+                  value: user
+              - column:
+                  name: password
+                  value: $2a$12$m8sGJT5CkNhQG0ojxzWqEOAdYCftG2GxhbeTOISWWl3yhPqKSZMKa
+              - column:
+                  name: role
+                  value: USER
+        - insert:
+            tableName: auth_user
+            columns:
+              - column:
+                  name: user_name
+                  value: admin
+              - column:
+                  name: password
+                  value: $2a$12$qlP5YqzjA3FzWMZrn3Ck3eRlfryZwkZ.QhoegzI1NQGEfOQhvc0oC
+              - column:
+                  name: role
+                  value: ADMIN

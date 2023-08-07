@@ -138,8 +138,4 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<EmployeeDTO> employeeDTOList = objectMapper.readValue(file.getBytes(), typeReference);
         employeeDTOList.forEach(this::addEmployees);
     }
-
-    public boolean checkEmployees(Employee e1, Employee e2) {
-        return e1.equals(e2);
-    }
 }

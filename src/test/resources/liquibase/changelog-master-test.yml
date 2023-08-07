@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - include:
+      file: liquibase/changesets/table_employee_create_test.yml
+  - include:
+      file: liquibase/changesets/table_position_create_test.yml
+  - include:
+      file: liquibase/changesets/table_auth_user_create_test.yml
+  - include:
+      file: liquibase/changesets/table_report_file_create_test.yml
+  - include:
+      file: liquibase/changesets/insert_position_test.yml
+  - include:
+      file: liquibase/changesets/insert_employee_test.yml
+  - include:
+      file: liquibase/changesets/insert_user_test.yml
