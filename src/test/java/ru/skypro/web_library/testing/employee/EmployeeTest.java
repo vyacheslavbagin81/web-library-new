@@ -13,8 +13,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.mockito.Mock;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.mock.web.MockMultipartFile;
 import ru.skypro.web_library.testing.dto.EmployeeDTO;
@@ -32,7 +34,7 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 @AutoConfigureMockMvc
 @WithUserDetails("admin")
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+//@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class EmployeeTest {
     @Autowired
     MockMvc mockMvc;
@@ -49,6 +51,7 @@ public class EmployeeTest {
 
 
     @Test
+    @Transactional
     void addUsersToDatabases() throws Exception {
         mockMvc.perform(post("/employees").contentType(MediaType.APPLICATION_JSON).content(jsonObject.toString()))
                 .andDo(print())
@@ -74,6 +77,7 @@ public class EmployeeTest {
     }
 
     @Test
+    @Transactional
     void changingUserDataToDatabases_correctId() throws Exception {
         jsonObject.put("id", "1");
         mockMvc.perform(put("/employees").contentType(MediaType.APPLICATION_JSON).content(jsonObject.toString()))
@@ -188,6 +192,7 @@ public class EmployeeTest {
     }
 
     @Test
+    @Transactional
     void deleteEmployeeToId_correctId() throws Exception {
         mockMvc.perform(delete("/employees/1"))
                 .andDo(print())
@@ -210,6 +215,7 @@ public class EmployeeTest {
     }
 
     @Test
+    @Transactional
     void uploadAndSaveEmployees() throws Exception {
         List<EmployeeDTO> list = List.of(new EmployeeDTO(10, "10", 10),
                 new EmployeeDTO(11, "11", 11),
