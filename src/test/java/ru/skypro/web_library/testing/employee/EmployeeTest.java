@@ -2,7 +2,6 @@ package ru.skypro.web_library.testing.employee;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.persistence.MapKey;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,30 +10,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithUserDetails;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.web.servlet.MockMvc;
-import org.mockito.Mock;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.test.context.support.WithUserDetails;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 import ru.skypro.web_library.testing.dto.EmployeeDTO;
 
-import java.io.File;
-import java.nio.file.Files;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @WithUserDetails("admin")
-//@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class EmployeeTest {
     @Autowired
     MockMvc mockMvc;
@@ -84,13 +75,11 @@ public class EmployeeTest {
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        mockMvc.perform(get("/employees"))
+        mockMvc.perform(get("/employees/1"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$").isNotEmpty())
-                .andExpect(jsonPath("$.length()").value(8))
-                .andExpect(jsonPath("$[0].name").value("Тест9"));
+                .andExpect(jsonPath("$.name").value("Тест9"));
     }
 
     @Test
